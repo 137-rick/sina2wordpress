@@ -94,8 +94,11 @@ class Sina2WordPressCore():
                     msg = '(%d/%d) Analyzing Comment: %s' % (count, total, comment_url, )
                     interface.progress_update(msg, count, total)
 
-                    comment_text, comment_id = comment_analyze(
-                            comment_url, comment_id, sina_admin, wordpress_admin, wordpress_url)
+                    try:
+                        comment_text, comment_id = comment_analyze(
+                                comment_url, comment_id, sina_admin, wordpress_admin, wordpress_url)
+                    finally:
+                        break
 
                     if comment_text:
                         text.append(comment_text)
