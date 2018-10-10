@@ -97,7 +97,7 @@ class Sina2WordPressCore():
                     try:
                         comment_text, comment_id = comment_analyze(
                                 comment_url, comment_id, sina_admin, wordpress_admin, wordpress_url)
-                    finally:
+                    except:
                         break
 
                     if comment_text:
@@ -183,7 +183,10 @@ def post_analyze(url, wordpress_admin):
     page = urlopen_request(request)
     #headers['Referer'] = url
 
-    post_title = content_clear(post_title_pattern.search(page).group(1))
+    try:
+        post_title = content_clear(post_title_pattern.search(page).group(1))
+    except:
+        return '',''
     post_time = post_time_pattern.search(page).group(1)
     post_content = content_clear(post_content_pattern.search(page).group(1))
 
